@@ -9,12 +9,14 @@
             var template = document.querySelector("template");
             // templateのクローンを生成(この時点では親ノードはnull)
             var clone = document.importNode(template.content, true);
+
+            var div = document.querySelector("div");
             // bodyにappend(親ノードがbodyになる)
-            document.body.appendChild(clone);
+            div.appendChild(clone);
 
             // 新たにクローンを作れば、複数追加出来る
             var clone2 = document.importNode(template.content, true);
-            document.body.appendChild(clone2);
+            div.appendChild(clone2);
 
             // buttonにクリックイベントをつけてみる
             var buttons = document.querySelectorAll("button");
@@ -33,6 +35,8 @@
     </style>
 </head>
 <body>
+    <div></div>
+
     <template>
         <style>
             button {
