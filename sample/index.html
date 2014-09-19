@@ -4,39 +4,48 @@
     <meta charset="UTF-8">
     <title>yamada-element</title>
     <script>
-        var YamadaPrototype = Object.create(HTMLElement.prototype);
-        // コールバック設定
-        YamadaPrototype.createdCallback = function(){
-            console.log("created");
-        };
-        YamadaPrototype.attachedCallback = function(){
-            console.log("attached");
-        };
-        YamadaPrototype.detachedCallback = function(){
-            console.log("detached");
-        };
-        YamadaPrototype.attributeChangedCallback = function(){
-            console.log("attributeChanged");
-        };
-
-        // 独自のエレメントをドキュメントに登録(registerElementの返り値はコンストラクタ)
-        var YamadaElement = document.registerElement("yamada-element", {
-            prototype: YamadaPrototype,
-        });
-
-        // 独自エレメントを生成(createdCallbackが呼ばれる)
-        var yamadaElement = new YamadaElement();
-
         window.onload = function(){
-            // bodyに独自エレメントをappend(appendedCallbackが呼ばれる)
-            document.body.appendChild(yamadaElement);
-            // 属性変更(attributeChangedCallbackが呼ばれる)
-            yamadaElement.setAttribute("name", "yamada");
-            // 独自エレメントを削除(detachedCallbackが呼ばれる)
-            document.body.removeChild(yamadaElement);
-        }
+            // templateタグからdomを取得
+            var template = document.querySelector("template");
+            // templateのクローンを生成(この時点では親ノードはnull)
+            var clone = document.importNode(template.content, true);
+            // bodyにappend(親ノードがbodyになる)
+            document.body.appendChild(clone);
+
+            // 新たにクローンを作れば、複数追加出来る
+            var clone2 = document.importNode(template.content, true);
+            document.body.appendChild(clone2);
+
+            // buttonにクリックイベントをつけてみる
+            var buttons = document.querySelectorAll("button");
+            for(var i = 0; i < buttons.length; i++){
+                buttons[i].addEventListener('click', function(event){
+                    alert('hello');
+                });
+            };
+        };
+        // 単にtemplateだけ使うと下のようなstyleの影響を受ける
     </script>
+    <style>
+        img{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+    <template>
+        <style>
+            button {
+                display: block;
+            }
+            /* こっちのstyle定義で上書きされるけど, tempalateの外にも影響をおよぼす */
+            img {
+                width: 20%;
+            }
+        </style>
+        <img src="./img/picture.png" alt="picture">
+        <button>click</button>
+    </template>
+    <img src="./img/picture.png" alt="picture">
 </body>
 </html>
