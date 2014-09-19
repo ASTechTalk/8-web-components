@@ -14,16 +14,25 @@
     "tests"
   ],
   "dependencies": {
+    "polymer": "~0.4.1",
     "bootstrap": "~3.2.0"
   },
-  "exportsOverride":{
-    "bootstrap":{
+  "exportsOverride": {
+    "bootstrap": {
       "js": "**/dist/js/bootstrap.js",
-      "css": ["**/dist/css/bootstrap.css", "**/dist/css/bootstrap-theme.css"],
+      "css": [
+        "**/dist/css/bootstrap.css",
+        "**/dist/css/bootstrap-theme.css"
+      ],
       "fonts": "**/dist/fonts"
     },
-    "jquery":{
+    "jquery": {
       "js": "**/dist/jquery.js"
+    },
+    "polymer": {
+      "polymer": "**/polymer",
+      "platform": "**/platform",
+      "core-component-page": "**/core-component-page"
     }
   }
 }
