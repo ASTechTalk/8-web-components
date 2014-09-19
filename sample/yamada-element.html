@@ -1,23 +1,24 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
-
-<polymer-element name="yamada-element" noscript>
+<polymer-element name="yamada-element" attributes="message src">
     <template>
         <style>
             button {
                 display: block;
             }
-            /* shadowRootの下にあるから、tempalateの外にも影響をおよぼさない */
             img {
                 width: 20%;
             }
         </style>
-        <img src="./img/picture.png" alt="picture">
-        <button on-click="{{showAlert}}">click</button>
+        <img src="{{src}}" alt="picture">
+        <button on-click="{{showAlert}}" message="{{message}}">click</button>
     </template>
     <script>
         Polymer("yamada-element", {
-            showAlert: function(){
-                alert("hello");
+            message: "",
+            src: "",
+            showAlert: function(e){
+                var message =  e.target.getAttribute("message");
+                alert(message);
             }
         });
     </script>
