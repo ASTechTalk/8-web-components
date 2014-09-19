@@ -1,0 +1,29 @@
+{
+  "name": "web-components-sample",
+  "version": "1.0.0",
+  "authors": [
+    "asktkhr"
+  ],
+  "description": "Web Components Sample",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0"
+  },
+  "exportsOverride":{
+    "bootstrap":{
+      "js": "**/dist/js/bootstrap.js",
+      "css": ["**/dist/css/bootstrap.css", "**/dist/css/bootstrap-theme.css"],
+      "fonts": "**/dist/fonts"
+    },
+    "jquery":{
+      "js": "**/dist/jquery.js"
+    }
+  }
+}

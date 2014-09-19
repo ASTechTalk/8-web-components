@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>yamada-element</title>
+    <script>
+        var YamadaPrototype = Object.create(HTMLElement.prototype);
+        // コールバック設定
+        YamadaPrototype.createdCallback = function(){
+            console.log("created");
+        };
+        YamadaPrototype.attachedCallback = function(){
+            console.log("attached");
+        };
+        YamadaPrototype.detachedCallback = function(){
+            console.log("detached");
+        };
+        YamadaPrototype.attributeChangedCallback = function(){
+            console.log("attributeChanged");
+        };
+
+        // 独自のエレメントをドキュメントに登録(registerElementの返り値はコンストラクタ)
+        var YamadaElement = document.registerElement("yamada-element", {
+            prototype: YamadaPrototype,
+        });
+
+        // 独自エレメントを生成(createdCallbackが呼ばれる)
+        var yamadaElement = new YamadaElement();
+
+        window.onload = function(){
+            // bodyに独自エレメントをappend(appendedCallbackが呼ばれる)
+            document.body.appendChild(yamadaElement);
+            // 属性変更(attributeChangedCallbackが呼ばれる)
+            yamadaElement.setAttribute("name", "yamada");
+            // 独自エレメントを削除(detachedCallbackが呼ばれる)
+            document.body.removeChild(yamadaElement);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
