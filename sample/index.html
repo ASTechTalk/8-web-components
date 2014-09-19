@@ -3,29 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>yamada-element</title>
-    <script>
-        window.onload = function(){
-            // templateタグからdomを取得
-            var template = document.querySelector("template");
-            // templateのクローンを生成(この時点では親ノードはnull)
-            var clone = document.importNode(template.content, true);
-            
-            var div = document.querySelector("div");
-            // templateの要素が外部のstyleに影響されない/ 影響を与えないようにShadowRootを挟む
-            var shadowRoot = div.createShadowRoot();
-            // shadowRootにtemplateのクローンをappendする
-            shadowRoot.appendChild(clone);
-
-            // buttonにクリックイベントをつけてみる
-            var buttons = document.querySelectorAll("button");
-            for(var i = 0; i < buttons.length; i++){
-                buttons[i].addEventListener('click', function(event){
-                    alert('hello');
-                });
-            };
-        };
-        // shadowRootによって下のstyleの影響を受けない
-    </script>
+    <link rel="import" href="yamada-element.html">
+    
     <style>
         img{
             width: 100%;
@@ -33,21 +12,8 @@
     </style>
 </head>
 <body>
-    <div></div>
-
-    <template>
-        <style>
-            button {
-                display: block;
-            }
-            /* shadowRootの下にあるから、tempalateの外にも影響をおよぼさない */
-            img {
-                width: 20%;
-            }
-        </style>
-        <img src="./img/picture.png" alt="picture">
-        <button>click</button>
-    </template>
+    <yamada-element></yamada-element>
+    <yamada-element></yamada-element>
     <img src="./img/picture.png" alt="picture">
 </body>
 </html>
